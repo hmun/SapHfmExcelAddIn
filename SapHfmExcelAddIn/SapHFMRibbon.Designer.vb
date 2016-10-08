@@ -1,4 +1,4 @@
-﻿Partial Class Ribbon1
+﻿Partial Class SapHFMRibbon
     Inherits Microsoft.Office.Tools.Ribbon.RibbonBase
 
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -79,9 +79,9 @@
         Me.ButtonSAPLogoff.Label = "SAP Logoff"
         Me.ButtonSAPLogoff.Name = "ButtonSAPLogoff"
         '
-        'Ribbon1
+        'SapHFMRibbon
         '
-        Me.Name = "Ribbon1"
+        Me.Name = "SapHFMRibbon"
         Me.RibbonType = "Microsoft.Excel.Workbook"
         Me.Tabs.Add(Me.Tab1)
         Me.Tab1.ResumeLayout(False)
@@ -102,9 +102,9 @@ End Class
 Partial Class ThisRibbonCollection
 
     <System.Diagnostics.DebuggerNonUserCode()> _
-    Friend ReadOnly Property Ribbon1() As Ribbon1
+    Friend ReadOnly Property Ribbon1() As SapHFMRibbon
         Get
-            Return Me.GetRibbon(Of Ribbon1)()
+            Return Me.GetRibbon(Of SapHFMRibbon)()
         End Get
     End Property
 End Class

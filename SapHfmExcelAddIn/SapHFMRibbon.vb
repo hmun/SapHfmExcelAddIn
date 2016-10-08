@@ -4,7 +4,7 @@
 
 Imports Microsoft.Office.Tools.Ribbon
 
-Public Class Ribbon1
+Public Class SapHFMRibbon
     Const HFMRow = 5
     Const HFMCol = 9
 

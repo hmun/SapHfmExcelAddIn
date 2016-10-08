@@ -215,10 +215,10 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SapCon.vb" />
-    <Compile Include="Ribbon1.Designer.vb">
-      <DependentUpon>Ribbon1.vb</DependentUpon>
+    <Compile Include="SapHFMRibbon.Designer.vb">
+      <DependentUpon>SapHFMRibbon.vb</DependentUpon>
     </Compile>
-    <Compile Include="Ribbon1.vb">
+    <Compile Include="SapHFMRibbon.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="SapHFMAddIn.vb">
@@ -229,8 +229,8 @@
     <EmbeddedResource Include="FormLogon.resx">
       <DependentUpon>FormLogon.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Ribbon1.resx">
-      <DependentUpon>Ribbon1.vb</DependentUpon>
+    <EmbeddedResource Include="SapHFMRibbon.resx">
+      <DependentUpon>SapHFMRibbon.vb</DependentUpon>
     </EmbeddedResource>
     <None Include="Hermann_Mundprecht.pfx" />
     <None Include="hmun.pfx" />
