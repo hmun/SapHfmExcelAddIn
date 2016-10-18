@@ -18,6 +18,7 @@ Public Class SAP_ZFAGL_UPD_YMPNUM
     Public Function update(pCHRT_ACCTS As String, pYMPNUM As String, pYHFMACC As String, pYHFMCU1 As String, pYHFMCU2 As String,
                            pYHFMCU3 As String, pYHFMICP As String, pYHFMSIGN As Integer) As Integer
         sapcon.checkCon()
+        RfcSessionManager.BeginContext(destination)
         Try
             oRfcFunction.SetValue("I_CHRT_ACCTS", pCHRT_ACCTS)
             oRfcFunction.SetValue("I_YMPNUM", pYMPNUM)
@@ -32,6 +33,8 @@ Public Class SAP_ZFAGL_UPD_YMPNUM
         Catch ex As Exception
             MsgBox("Exception in SAP_ZFAGL_UPD_YMPNUM.update! " & ex.Message, MsgBoxStyle.OkOnly Or MsgBoxStyle.Critical, "SAP BI HFM")
             update = 4
+        Finally
+            RfcSessionManager.EndContext(destination)
         End Try
     End Function
 

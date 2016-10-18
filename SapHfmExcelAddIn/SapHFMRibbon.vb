@@ -120,7 +120,15 @@ Public Class SapHFMRibbon
         If aConRet = 0 Then
         End If
 
-        Dim aSAP_ZFAGL_UPD_YMPNUM As New SAP_ZFAGL_UPD_YMPNUM(aSapCon)
+        Dim aSAP_ZFAGL_UPD_YMPNUM As SAP_ZFAGL_UPD_YMPNUM
+
+        Try
+            aSAP_ZFAGL_UPD_YMPNUM = New SAP_ZFAGL_UPD_YMPNUM(aSapCon)
+        Catch ex As System.Exception
+            MsgBox("Exception in SAP_ZFAGL_UPD_YMPNUM.update! " & ex.Message, MsgBoxStyle.OkOnly Or MsgBoxStyle.Critical, "SAP_ZFAGL_UPD_YMPNUM")
+            Exit Sub
+        End Try
+
         aDws.Activate()
         i = 2
         Do
@@ -130,6 +138,7 @@ Public Class SapHFMRibbon
                 aDws.Cells(i, 8) = "OK"
             Else
                 aDws.Cells(i, 8) = "Error: " & aRet
+                Exit Sub
             End If
             i = i + 1
         Loop While aDws.Cells(i, 1).Value <> ""
