@@ -47,21 +47,21 @@ Public Class SapHFMRibbon
         Do
             aSAPYPNUMItem = New SAPYPNUMItem
             If Not aDict.ContainsKey(aTws.Cells(i, HFMCol).Value) Then
-                If aTws.Cells(i, HFMCol + 6).Value = "#" Then
+                If CStr(aTws.Cells(i, HFMCol + 6).Value) = "#" Then
                     aHFMSign = 0
                 Else
                     aHFMSign = CInt(aTws.Cells(i, HFMCol + 6).Value)
                 End If
-                If aTws.Cells(i, HFMCol + 1).Value <> "#" And aTws.Cells(i, HFMCol + 2).Value <> "#" And aTws.Cells(i, HFMCol + 3).Value <> "#" _
-                   And aTws.Cells(i, HFMCol + 4).Value <> "#" And aTws.Cells(i, HFMCol + 5).Value <> "#" Then
-                    aSAPYPNUMItem = aSAPYPNUMItem.create(aChartofAccounts, aTws.Cells(i, HFMCol).Value, aTws.Cells(i, HFMCol + 1).Value,
-                                                         aTws.Cells(i, HFMCol + 2).Value, aTws.Cells(i, HFMCol + 3).Value,
-                                                         aTws.Cells(i, HFMCol + 4).Value, aTws.Cells(i, HFMCol + 5).Value, aHFMSign)
+                If CStr(aTws.Cells(i, HFMCol + 1).Value) <> "#" And CStr(aTws.Cells(i, HFMCol + 2).Value) <> "#" And CStr(aTws.Cells(i, HFMCol + 3).Value) <> "#" _
+                   And CStr(aTws.Cells(i, HFMCol + 4).Value) <> "#" And CStr(aTws.Cells(i, HFMCol + 5).Value) <> "#" Then
+                    aSAPYPNUMItem = aSAPYPNUMItem.create(aChartofAccounts, CStr(aTws.Cells(i, HFMCol).Value), CStr(aTws.Cells(i, HFMCol + 1).Value),
+                                                         CStr(aTws.Cells(i, HFMCol + 2).Value), CStr(aTws.Cells(i, HFMCol + 3).Value),
+                                                         CStr(aTws.Cells(i, HFMCol + 4).Value), CStr(aTws.Cells(i, HFMCol + 5).Value), aHFMSign)
                     aDict.Add(aTws.Cells(i, HFMCol).Value, aSAPYPNUMItem)
                 End If
             End If
             i = i + 1
-        Loop While aTws.Cells(i, HFMCol).Value <> ""
+        Loop While CStr(aTws.Cells(i, HFMCol).Value) <> ""
 
         aDws.Activate()
         If aDws.Cells(2, 1).Value <> "" Then
@@ -74,15 +74,18 @@ Public Class SapHFMRibbon
             aRange.EntireRow.Delete()
         End If
 
+        Dim aCells As Excel.Range
         i = 2
         For Each Item In aDict.Values
-            aDws.Cells(i, 1) = Item.YMPNUM
-            aDws.Cells(i, 2) = Item.YHFMACC
-            aDws.Cells(i, 3) = Item.YHFMCU1
-            aDws.Cells(i, 4) = Item.YHFMCU2
-            aDws.Cells(i, 5) = Item.YHFMCU3
-            aDws.Cells(i, 6) = Item.YHFMICP
-            aDws.Cells(i, 7) = Item.YHFMSIGN
+            aCells = aDws.Range(aDws.Cells(i, 1), aDws.Cells(i, 8))
+            aCells.NumberFormat = "@"
+            aDws.Cells(i, 1).Value2 = Item.YMPNUM
+            aDws.Cells(i, 2).Value2 = Item.YHFMACC
+            aDws.Cells(i, 3).Value2 = Item.YHFMCU1
+            aDws.Cells(i, 4).Value2 = Item.YHFMCU2
+            aDws.Cells(i, 5).Value2 = Item.YHFMCU3
+            aDws.Cells(i, 6).Value2 = Item.YHFMICP
+            aDws.Cells(i, 7).Value2 = Item.YHFMSIGN
             i = i + 1
         Next
 
@@ -132,8 +135,8 @@ Public Class SapHFMRibbon
         aDws.Activate()
         i = 2
         Do
-            aRet = aSAP_ZFAGL_UPD_YMPNUM.update(aChartofAccounts, aDws.Cells(i, 1).Value, aDws.Cells(i, 2).Value, aDws.Cells(i, 3).Value,
-                                                aDws.Cells(i, 4).Value, aDws.Cells(i, 5).Value, aDws.Cells(i, 6).Value, CInt(aDws.Cells(i, 7).Value))
+            aRet = aSAP_ZFAGL_UPD_YMPNUM.update(aChartofAccounts, CStr(aDws.Cells(i, 1).Value), CStr(aDws.Cells(i, 2).Value), CStr(aDws.Cells(i, 3).Value),
+                                                CStr(aDws.Cells(i, 4).Value), CStr(aDws.Cells(i, 5).Value), CStr(aDws.Cells(i, 6).Value), CInt(aDws.Cells(i, 7).Value))
             If aRet = 0 Then
                 aDws.Cells(i, 8) = "OK"
             Else

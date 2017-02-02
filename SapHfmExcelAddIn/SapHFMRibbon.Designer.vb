@@ -53,7 +53,7 @@
         'Tab1
         '
         Me.Tab1.Groups.Add(Me.SapBiHfm)
-        Me.Tab1.Label = "Sap BI HFM"
+        Me.Tab1.Label = "SAP BI HFM"
         Me.Tab1.Name = "Tab1"
         '
         'SapBiHfm
