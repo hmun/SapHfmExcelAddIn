@@ -6,6 +6,7 @@ Imports SAP.Middleware.Connector
 
 Public Class SAP_ZFAGL_UPD_YMPNUM
     Private oRfcFunction As IRfcFunction
+    Private oRfcFunctionMf As IRfcFunction
     Private destination As RfcCustomDestination
     Private sapcon As SapCon
 
@@ -13,6 +14,7 @@ Public Class SAP_ZFAGL_UPD_YMPNUM
         sapcon = aSapCon
         destination = aSapCon.getDestination()
         oRfcFunction = destination.Repository.CreateFunction("ZFAGL_UPD_YMPNUM")
+        oRfcFunctionMf = destination.Repository.CreateFunction("ZFAGL_UPD_YMPNUMMF")
     End Sub
 
     Public Function update(pCHRT_ACCTS As String, pYMPNUM As String, pYHFMACC As String, pYHFMCU1 As String, pYHFMCU2 As String,
@@ -38,8 +40,33 @@ Public Class SAP_ZFAGL_UPD_YMPNUM
         End Try
     End Function
 
+    Public Function update_mf(pCHRT_ACCTS As String, pYHFMMF As String, pYMPNUMMF As String, pYHFMACC As String, pYHFMCU1 As String, pYHFMCU2 As String,
+                              pYHFMCU3 As String, pYHFMICP As String, pYHFMSIGN As Integer) As Integer
+        sapcon.checkCon()
+        RfcSessionManager.BeginContext(destination)
+        Try
+            oRfcFunctionMf.SetValue("I_CHRT_ACCTS", pCHRT_ACCTS)
+            oRfcFunctionMf.SetValue("I_YHFMMF", pYHFMMF)
+            oRfcFunctionMf.SetValue("I_YMPNUMMF", pYMPNUMMF)
+            oRfcFunctionMf.SetValue("I_YHFMACC", pYHFMACC)
+            oRfcFunctionMf.SetValue("I_YHFMCU1", pYHFMCU1)
+            oRfcFunctionMf.SetValue("I_YHFMCU2", pYHFMCU2)
+            oRfcFunctionMf.SetValue("I_YHFMCU3", pYHFMCU3)
+            oRfcFunctionMf.SetValue("I_YHFMICP", pYHFMICP)
+            oRfcFunctionMf.SetValue("I_YHFMSIGN", pYHFMSIGN)
+            oRfcFunctionMf.Invoke(destination)
+            update_mf = oRfcFunctionMf.GetValue("E_RETURN")
+        Catch ex As Exception
+            MsgBox("Exception in SAP_ZFAGL_UPD_YMPNUM.update_mf! " & ex.Message, MsgBoxStyle.OkOnly Or MsgBoxStyle.Critical, "SAP BI HFM")
+            update_mf = 4
+        Finally
+            RfcSessionManager.EndContext(destination)
+        End Try
+    End Function
+
     Public Sub RemoveFunction()
         destination.Repository.RemoveFunctionMetadata("ZFAGL_UPD_YMPNUM")
+        destination.Repository.RemoveFunctionMetadata("ZFAGL_UPD_YMPNUMMF")
     End Sub
 
 End Class

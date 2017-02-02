@@ -17,6 +17,7 @@ Public Class SapHFMRibbon
         Dim aWB As Excel.Workbook
         Dim aRange As Excel.Range
         Dim aChartofAccounts As String
+        Dim aMappingFamily As String
         Dim i As Integer
         Dim aSAPYPNUMItem As SAPYPNUMItem
         Dim aDict As New Dictionary(Of String, SAPYPNUMItem)
@@ -29,7 +30,8 @@ Public Class SapHFMRibbon
             MsgBox("No Parameter Sheet in current workbook", MsgBoxStyle.OkOnly Or MsgBoxStyle.Critical, "SAP BI HFM")
             Exit Sub
         End Try
-        aChartofAccounts = aPws.Cells(2, 2).Value
+        aChartofAccounts = CStr(aPws.Cells(2, 2).Value)
+        aMappingFamily = CStr(aPws.Cells(3, 2).Value)
         Try
             aTws = aWB.Worksheets("Table")
         Catch Exc As System.Exception
@@ -97,6 +99,7 @@ Public Class SapHFMRibbon
         Dim aWB As Excel.Workbook
         Dim aConRet As Integer
         Dim aChartofAccounts As String
+        Dim aMappingFamily As String
         Dim aRet As Integer
         Dim i As Integer
 
@@ -107,7 +110,8 @@ Public Class SapHFMRibbon
             MsgBox("No Parameter Sheet in current workbook", MsgBoxStyle.OkOnly Or MsgBoxStyle.Critical, "SAP BI HFM")
             Exit Sub
         End Try
-        aChartofAccounts = aPws.Cells(2, 2).Value
+        aChartofAccounts = CStr(aPws.Cells(2, 2).Value)
+        aMappingFamily = CStr(aPws.Cells(3, 2).Value)
         Try
             aDws = aWB.Worksheets("Data")
         Catch Exc As System.Exception
@@ -135,8 +139,8 @@ Public Class SapHFMRibbon
         aDws.Activate()
         i = 2
         Do
-            aRet = aSAP_ZFAGL_UPD_YMPNUM.update(aChartofAccounts, CStr(aDws.Cells(i, 1).Value), CStr(aDws.Cells(i, 2).Value), CStr(aDws.Cells(i, 3).Value),
-                                                CStr(aDws.Cells(i, 4).Value), CStr(aDws.Cells(i, 5).Value), CStr(aDws.Cells(i, 6).Value), CInt(aDws.Cells(i, 7).Value))
+            aRet = aSAP_ZFAGL_UPD_YMPNUM.update_mf(aChartofAccounts, aMappingFamily, CStr(aDws.Cells(i, 1).Value), CStr(aDws.Cells(i, 2).Value), CStr(aDws.Cells(i, 3).Value),
+                                                   CStr(aDws.Cells(i, 4).Value), CStr(aDws.Cells(i, 5).Value), CStr(aDws.Cells(i, 6).Value), CInt(aDws.Cells(i, 7).Value))
             If aRet = 0 Then
                 aDws.Cells(i, 8) = "OK"
             Else
