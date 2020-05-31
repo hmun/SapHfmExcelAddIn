@@ -41,26 +41,30 @@
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Tab1 = Me.Factory.CreateRibbonTab
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SapHFMRibbon))
+        Me.SapHfm = Me.Factory.CreateRibbonTab
         Me.SapBiHfm = Me.Factory.CreateRibbonGroup
         Me.ButtonTransferHFM = Me.Factory.CreateRibbonButton
         Me.ButtonUpdateHFM = Me.Factory.CreateRibbonButton
         Me.ButtonSAPLogoff = Me.Factory.CreateRibbonButton
-        Me.Tab1.SuspendLayout()
+        Me.SapBiHfmLogon = Me.Factory.CreateRibbonGroup
+        Me.ButtonSAPLogon = Me.Factory.CreateRibbonButton
+        Me.SapHfm.SuspendLayout()
         Me.SapBiHfm.SuspendLayout()
+        Me.SapBiHfmLogon.SuspendLayout()
         Me.SuspendLayout()
         '
-        'Tab1
+        'SapHfm
         '
-        Me.Tab1.Groups.Add(Me.SapBiHfm)
-        Me.Tab1.Label = "SAP BI HFM"
-        Me.Tab1.Name = "Tab1"
+        Me.SapHfm.Groups.Add(Me.SapBiHfm)
+        Me.SapHfm.Groups.Add(Me.SapBiHfmLogon)
+        Me.SapHfm.Label = "SAP BI HFM"
+        Me.SapHfm.Name = "SapHfm"
         '
         'SapBiHfm
         '
         Me.SapBiHfm.Items.Add(Me.ButtonTransferHFM)
         Me.SapBiHfm.Items.Add(Me.ButtonUpdateHFM)
-        Me.SapBiHfm.Items.Add(Me.ButtonSAPLogoff)
         Me.SapBiHfm.Label = "Sap BI HFM"
         Me.SapBiHfm.Name = "SapBiHfm"
         '
@@ -76,27 +80,47 @@
         '
         'ButtonSAPLogoff
         '
+        Me.ButtonSAPLogoff.Image = CType(resources.GetObject("ButtonSAPLogoff.Image"), System.Drawing.Image)
         Me.ButtonSAPLogoff.Label = "SAP Logoff"
         Me.ButtonSAPLogoff.Name = "ButtonSAPLogoff"
+        Me.ButtonSAPLogoff.ShowImage = True
+        '
+        'SapBiHfmLogon
+        '
+        Me.SapBiHfmLogon.Items.Add(Me.ButtonSAPLogon)
+        Me.SapBiHfmLogon.Items.Add(Me.ButtonSAPLogoff)
+        Me.SapBiHfmLogon.Label = "Logon"
+        Me.SapBiHfmLogon.Name = "SapBiHfmLogon"
+        '
+        'ButtonSAPLogon
+        '
+        Me.ButtonSAPLogon.Image = CType(resources.GetObject("ButtonSAPLogon.Image"), System.Drawing.Image)
+        Me.ButtonSAPLogon.Label = "SAP Logon"
+        Me.ButtonSAPLogon.Name = "ButtonSAPLogon"
+        Me.ButtonSAPLogon.ShowImage = True
         '
         'SapHFMRibbon
         '
         Me.Name = "SapHFMRibbon"
         Me.RibbonType = "Microsoft.Excel.Workbook"
-        Me.Tabs.Add(Me.Tab1)
-        Me.Tab1.ResumeLayout(False)
-        Me.Tab1.PerformLayout()
+        Me.Tabs.Add(Me.SapHfm)
+        Me.SapHfm.ResumeLayout(False)
+        Me.SapHfm.PerformLayout()
         Me.SapBiHfm.ResumeLayout(False)
         Me.SapBiHfm.PerformLayout()
+        Me.SapBiHfmLogon.ResumeLayout(False)
+        Me.SapBiHfmLogon.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents Tab1 As Microsoft.Office.Tools.Ribbon.RibbonTab
+    Friend WithEvents SapHfm As Microsoft.Office.Tools.Ribbon.RibbonTab
     Friend WithEvents SapBiHfm As Microsoft.Office.Tools.Ribbon.RibbonGroup
     Friend WithEvents ButtonUpdateHFM As Microsoft.Office.Tools.Ribbon.RibbonButton
     Friend WithEvents ButtonTransferHFM As Microsoft.Office.Tools.Ribbon.RibbonButton
     Friend WithEvents ButtonSAPLogoff As Microsoft.Office.Tools.Ribbon.RibbonButton
+    Friend WithEvents SapBiHfmLogon As Microsoft.Office.Tools.Ribbon.RibbonGroup
+    Friend WithEvents ButtonSAPLogon As Microsoft.Office.Tools.Ribbon.RibbonButton
 End Class
 
 Partial Class ThisRibbonCollection

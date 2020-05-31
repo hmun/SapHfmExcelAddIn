@@ -5,7 +5,7 @@
 Public Class SapHFMAddIn
 
     Private Sub SapHFMAddIn_Startup() Handles Me.Startup
-
+        log4net.Config.XmlConfigurator.Configure()
     End Sub
 
     Private Sub SapHFMAddIn_Shutdown() Handles Me.Shutdown
