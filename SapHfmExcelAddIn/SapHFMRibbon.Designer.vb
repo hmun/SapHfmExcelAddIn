@@ -43,47 +43,53 @@
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SapHFMRibbon))
         Me.SapHfm = Me.Factory.CreateRibbonTab
+        Me.Generate = Me.Factory.CreateRibbonGroup
+        Me.ButtonGenData = Me.Factory.CreateRibbonButton
         Me.SapBiHfm = Me.Factory.CreateRibbonGroup
-        Me.ButtonTransferHFM = Me.Factory.CreateRibbonButton
-        Me.ButtonUpdateHFM = Me.Factory.CreateRibbonButton
-        Me.ButtonSAPLogoff = Me.Factory.CreateRibbonButton
+        Me.ButtonUpdateHFMMulti = Me.Factory.CreateRibbonButton
         Me.SapBiHfmLogon = Me.Factory.CreateRibbonGroup
         Me.ButtonSAPLogon = Me.Factory.CreateRibbonButton
+        Me.ButtonSAPLogoff = Me.Factory.CreateRibbonButton
         Me.SapHfm.SuspendLayout()
+        Me.Generate.SuspendLayout()
         Me.SapBiHfm.SuspendLayout()
         Me.SapBiHfmLogon.SuspendLayout()
         Me.SuspendLayout()
         '
         'SapHfm
         '
+        Me.SapHfm.Groups.Add(Me.Generate)
         Me.SapHfm.Groups.Add(Me.SapBiHfm)
         Me.SapHfm.Groups.Add(Me.SapBiHfmLogon)
         Me.SapHfm.Label = "SAP BI HFM"
         Me.SapHfm.Name = "SapHfm"
         '
+        'Generate
+        '
+        Me.Generate.Items.Add(Me.ButtonGenData)
+        Me.Generate.Label = "Generate"
+        Me.Generate.Name = "Generate"
+        '
+        'ButtonGenData
+        '
+        Me.ButtonGenData.Image = CType(resources.GetObject("ButtonGenData.Image"), System.Drawing.Image)
+        Me.ButtonGenData.Label = "Generate Data"
+        Me.ButtonGenData.Name = "ButtonGenData"
+        Me.ButtonGenData.ScreenTip = "Generate the Output Data"
+        Me.ButtonGenData.ShowImage = True
+        '
         'SapBiHfm
         '
-        Me.SapBiHfm.Items.Add(Me.ButtonTransferHFM)
-        Me.SapBiHfm.Items.Add(Me.ButtonUpdateHFM)
+        Me.SapBiHfm.Items.Add(Me.ButtonUpdateHFMMulti)
         Me.SapBiHfm.Label = "Sap BI HFM"
         Me.SapBiHfm.Name = "SapBiHfm"
         '
-        'ButtonTransferHFM
+        'ButtonUpdateHFMMulti
         '
-        Me.ButtonTransferHFM.Label = "Transfer HFM Mapping"
-        Me.ButtonTransferHFM.Name = "ButtonTransferHFM"
-        '
-        'ButtonUpdateHFM
-        '
-        Me.ButtonUpdateHFM.Label = "Update HFM Mapping"
-        Me.ButtonUpdateHFM.Name = "ButtonUpdateHFM"
-        '
-        'ButtonSAPLogoff
-        '
-        Me.ButtonSAPLogoff.Image = CType(resources.GetObject("ButtonSAPLogoff.Image"), System.Drawing.Image)
-        Me.ButtonSAPLogoff.Label = "SAP Logoff"
-        Me.ButtonSAPLogoff.Name = "ButtonSAPLogoff"
-        Me.ButtonSAPLogoff.ShowImage = True
+        Me.ButtonUpdateHFMMulti.Image = CType(resources.GetObject("ButtonUpdateHFMMulti.Image"), System.Drawing.Image)
+        Me.ButtonUpdateHFMMulti.Label = "Update Account Mapping"
+        Me.ButtonUpdateHFMMulti.Name = "ButtonUpdateHFMMulti"
+        Me.ButtonUpdateHFMMulti.ShowImage = True
         '
         'SapBiHfmLogon
         '
@@ -99,6 +105,13 @@
         Me.ButtonSAPLogon.Name = "ButtonSAPLogon"
         Me.ButtonSAPLogon.ShowImage = True
         '
+        'ButtonSAPLogoff
+        '
+        Me.ButtonSAPLogoff.Image = CType(resources.GetObject("ButtonSAPLogoff.Image"), System.Drawing.Image)
+        Me.ButtonSAPLogoff.Label = "SAP Logoff"
+        Me.ButtonSAPLogoff.Name = "ButtonSAPLogoff"
+        Me.ButtonSAPLogoff.ShowImage = True
+        '
         'SapHFMRibbon
         '
         Me.Name = "SapHFMRibbon"
@@ -106,6 +119,8 @@
         Me.Tabs.Add(Me.SapHfm)
         Me.SapHfm.ResumeLayout(False)
         Me.SapHfm.PerformLayout()
+        Me.Generate.ResumeLayout(False)
+        Me.Generate.PerformLayout()
         Me.SapBiHfm.ResumeLayout(False)
         Me.SapBiHfm.PerformLayout()
         Me.SapBiHfmLogon.ResumeLayout(False)
@@ -116,11 +131,12 @@
 
     Friend WithEvents SapHfm As Microsoft.Office.Tools.Ribbon.RibbonTab
     Friend WithEvents SapBiHfm As Microsoft.Office.Tools.Ribbon.RibbonGroup
-    Friend WithEvents ButtonUpdateHFM As Microsoft.Office.Tools.Ribbon.RibbonButton
-    Friend WithEvents ButtonTransferHFM As Microsoft.Office.Tools.Ribbon.RibbonButton
     Friend WithEvents ButtonSAPLogoff As Microsoft.Office.Tools.Ribbon.RibbonButton
     Friend WithEvents SapBiHfmLogon As Microsoft.Office.Tools.Ribbon.RibbonGroup
     Friend WithEvents ButtonSAPLogon As Microsoft.Office.Tools.Ribbon.RibbonButton
+    Friend WithEvents ButtonUpdateHFMMulti As Microsoft.Office.Tools.Ribbon.RibbonButton
+    Friend WithEvents Generate As Microsoft.Office.Tools.Ribbon.RibbonGroup
+    Friend WithEvents ButtonGenData As Microsoft.Office.Tools.Ribbon.RibbonButton
 End Class
 
 Partial Class ThisRibbonCollection

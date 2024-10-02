@@ -36,7 +36,7 @@
     <PublishUrl>D:\VS_WS\SapHfmExcelAddIn_publish_64\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.1.2</ApplicationVersion>
+    <ApplicationVersion>1.0.2.1</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
@@ -148,20 +148,16 @@
   -->
   <ItemGroup>
     <Reference Include="Accessibility" />
-    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    <Reference Include="log4net, Version=2.0.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\SapHfmExcelAddInSetup_x64\packages\log4net.2.0.14\lib\net45\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="sapnco_utils_x64">
-      <HintPath>..\..\sapnco\sapnco_utils_x64.dll</HintPath>
+    <Reference Include="sapnco, Version=3.1.0.42, Culture=neutral, PublicKeyToken=50436dca5c7f7d23, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\sapnco\x86\3.1\sapnco.dll</HintPath>
     </Reference>
-    <Reference Include="sapnco_utils_x86">
-      <HintPath>..\..\sapnco\sapnco_utils_x86.dll</HintPath>
-    </Reference>
-    <Reference Include="sapnco_x64">
-      <HintPath>..\..\sapnco\sapnco_x64.dll</HintPath>
-    </Reference>
-    <Reference Include="sapnco_x86">
-      <HintPath>..\..\sapnco\sapnco_x86.dll</HintPath>
+    <Reference Include="sapnco_utils, Version=3.1.0.42, Culture=neutral, PublicKeyToken=50436dca5c7f7d23, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\sapnco\x86\3.1\sapnco_utils.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -184,6 +180,7 @@
     </Reference>
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -240,17 +237,23 @@
   -->
   <ItemGroup>
     <AppDesigner Include="My Project\" />
-    <Compile Include="FormDestinations.Designer.vb" />
+    <Compile Include="FormDestinations.designer.vb">
+      <DependentUpon>FormDestinations.vb</DependentUpon>
+    </Compile>
     <Compile Include="FormDestinations.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormLogon.Designer.vb" />
+    <Compile Include="FormLogon.designer.vb">
+      <DependentUpon>FormLogon.vb</DependentUpon>
+    </Compile>
     <Compile Include="FormLogon.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HFMConst.vb" />
+    <Compile Include="MigHelperVsto.vb" />
     <Compile Include="SapExcelDestination.vb" />
     <Compile Include="SapGeneral.vb" />
+    <Compile Include="SapHFMRibbon_Gen.vb" />
     <Compile Include="SapInMemoryDestinationConfiguration.vb" />
     <Compile Include="SapCon.vb" />
     <Compile Include="SapHFMRibbon.Designer.vb">
@@ -264,9 +267,15 @@
     </Compile>
     <Compile Include="SAPYPNUMItem.vb" />
     <Compile Include="SAP_ZFAGL_UPD_YMPNUM.vb" />
+    <Compile Include="TData.vb" />
+    <Compile Include="TDataRec.vb" />
     <Compile Include="TField.vb" />
-    <EmbeddedResource Include="FormDestinations.resx" />
-    <EmbeddedResource Include="FormLogon.resx" />
+    <EmbeddedResource Include="FormDestinations.resx">
+      <DependentUpon>FormDestinations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogon.resx">
+      <DependentUpon>FormLogon.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SapHFMRibbon.resx">
       <DependentUpon>SapHFMRibbon.vb</DependentUpon>
     </EmbeddedResource>
@@ -356,7 +365,7 @@
     </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>6BAB58755E88C24AA3612D6503EE9AE9DC851B47</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>BFFC88C79710D75CD33A0B63DCCDCE4A5AFF7245</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>

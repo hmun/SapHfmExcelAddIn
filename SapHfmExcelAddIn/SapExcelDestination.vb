@@ -22,7 +22,7 @@ Public Class SapExcelDestination
         End Try
         i = 2
         Do Until CStr(aPws.Cells(2, i).value) = ""
-            For j = 2 To 12
+            For j = 2 To 13
                 If CStr(aPws.Cells(j, i).value) <> "" Then
                     log.Debug("ExcelAddOrChangeDestination - conParameter.addConValue iD=" & CStr(i - 2) & " Field=" & CStr(aPws.Cells(j, 1).value) & " Value=" & CStr(aPws.Cells(j, i).value))
                     conParameter.addConValue(CStr(i - 2), CStr(aPws.Cells(j, 1).value), CStr(aPws.Cells(j, i).value))

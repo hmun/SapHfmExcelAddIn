@@ -71,8 +71,9 @@ Public Class HFMConstHelper
         Try
             aCws = aWB.Worksheets("HFM-Const")
             i = 2
-            While CStr(aCws.Cells(i, 1).Value) <> ""
+            While Not String.IsNullOrEmpty(aCws.Cells(i, 1).Value)
                 addHFMConst(CStr(aCws.Cells(i, 1).Value), CStr(aCws.Cells(i, 2).Value), CStr(aCws.Cells(i, 3).Value), CStr(aCws.Cells(i, 4).Value), CStr(aCws.Cells(i, 5).Value))
+                i += 1
             End While
         Catch Exc As System.Exception
             Exit Sub
@@ -84,7 +85,8 @@ Public Class HFMConstHelper
         Dim aHFMConst As HFMConst
         Dim aKey As String
         aKey = pAccount
-        If contains(aHFMConstCol, aKey, "obj") Then
+        aHFMConstCol.Contains(aKey)
+        If aHFMConstCol.Contains(aKey) Then
             aHFMConst = aHFMConstCol(aKey)
             aHFMConst.setValues(pAccount, pUD1, pUD2, pUD3, pICP)
         Else
@@ -98,7 +100,7 @@ Public Class HFMConstHelper
         Dim aHFMConst As HFMConst
         Dim aKey As String
         aKey = pAccount
-        If contains(aHFMConstCol, aKey, "obj") Then
+        If aHFMConstCol.Contains(aKey) Then
             aHFMConst = aHFMConstCol(aKey)
             aHFMConst.setValue(pField, pValue)
         Else
@@ -113,7 +115,7 @@ Public Class HFMConstHelper
         Dim aKey As String
         Dim aHFMConst As New HFMConst
         aKey = pAccount
-        If contains(aHFMConstCol, aKey, "obj") Then
+        If aHFMConstCol.Contains(aKey) Then
             aHFMConst = aHFMConstCol(aKey)
         Else
             aHFMConst = Nothing
@@ -125,7 +127,7 @@ Public Class HFMConstHelper
         Dim aKey As String
         Dim aHFMConst As HFMConst
         aKey = pAccount
-        If contains(aHFMConstCol, aKey, "obj") Then
+        If aHFMConstCol.Contains(aKey) Then
             aHFMConst = aHFMConstCol(aKey)
             If aHFMConst.UD1.Value <> "" Then
                 getConstantUD1 = aHFMConst.UD1.Value
@@ -141,7 +143,7 @@ Public Class HFMConstHelper
         Dim aKey As String
         Dim aHFMConst As HFMConst
         aKey = pAccount
-        If contains(aHFMConstCol, aKey, "obj") Then
+        If aHFMConstCol.Contains(aKey) Then
             aHFMConst = aHFMConstCol(aKey)
             If aHFMConst.UD2.Value <> "" Then
                 getConstantUD2 = aHFMConst.UD2.Value
@@ -157,7 +159,7 @@ Public Class HFMConstHelper
         Dim aKey As String
         Dim aHFMConst As HFMConst
         aKey = pAccount
-        If contains(aHFMConstCol, aKey, "obj") Then
+        If aHFMConstCol.Contains(aKey) Then
             aHFMConst = aHFMConstCol(aKey)
             If aHFMConst.UD3.Value <> "" Then
                 getConstantUD3 = aHFMConst.UD3.Value
@@ -173,7 +175,7 @@ Public Class HFMConstHelper
         Dim aKey As String
         Dim aHFMConst As HFMConst
         aKey = pAccount
-        If contains(aHFMConstCol, aKey, "obj") Then
+        If aHFMConstCol.Contains(aKey) Then
             aHFMConst = aHFMConstCol(aKey)
             If aHFMConst.ICP.Value <> "" Then
                 getConstantICP = aHFMConst.ICP.Value
